@@ -1,7 +1,9 @@
 import smelli
-import ipywidgets as widgets
 import wcxf
 import yaml
+import ipywidgets as widgets
+from IPython.display import Markdown,display
+
 
 # allowed bases
 # WET: everything that can be translated to flavio
@@ -39,3 +41,9 @@ ta_wc = widgets.Textarea(description="Wilson coefficients",
                          layout=widgets.Layout(min_width='50%', height='300px'),
                          style={'description_width': 'initial'})
 t_scale = widgets.Text(description="Scale in GeV", value='91.1876')
+
+def basis_pdf_link(eft, basis):
+    display(Markdown('[List of {0} {1} basis operators (PDF)](https://wcxf.github.io/assets/pdf/{0}.{1}.pdf)'.format(eft, basis)))
+
+out_basispdf = widgets.interactive_output(basis_pdf_link,
+    {'eft': select_eft, 'basis': select_basis})
